@@ -2,8 +2,8 @@
 //  Kevin_Burgon_Assignment5Tests.m
 //  Kevin_Burgon_Assignment5Tests
 //
-//  Created by Student User on 2/24/15.
-//  Copyright (c) 2015 student. All rights reserved.
+//  Created by student on 2/26/15.
+//  Copyright (c) 2015 Kevin Burgon. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
