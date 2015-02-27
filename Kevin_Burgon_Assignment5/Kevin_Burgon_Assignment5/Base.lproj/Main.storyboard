@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
@@ -52,7 +52,7 @@
                     </view>
                     <connections>
                         <outlet property="latLabel" destination="6Xk-6p-AeF" id="1nS-pN-ZzM"/>
-                        <outlet property="locationLabel" destination="N62-if-Y17" id="yoH-4C-iPs"/>
+                        <outlet property="locationLabel" destination="N62-if-Y17" id="GS8-1z-vNA"/>
                         <outlet property="longLabel" destination="Jgg-yP-2hm" id="zzV-7Z-J7r"/>
                         <outlet property="todayTemperature" destination="g2h-ke-WFT" id="g8P-6u-Yea"/>
                     </connections>

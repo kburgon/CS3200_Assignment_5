@@ -12,6 +12,7 @@
 @interface ViewController () <CLLocationManagerDelegate>
 
 @property (nonatomic, strong) NSString *locationText;
+@property (nonatomic, strong) NSString *curTemp;
 @property (weak, nonatomic) IBOutlet UILabel *todayTemperature;
 @property (strong, nonatomic) IBOutlet UILabel *latLabel;
 @property (strong, nonatomic) IBOutlet UILabel *longLabel;
@@ -34,7 +35,11 @@
 //    self.locationText = @"Logan";
     
 //    self.todayTemperature.text = @"56";
-    
+	
+//	NSLog(@"Initializing location manager...");
+	
+//	self.tempPerDay = [[NSMutableArray alloc] init];
+	
     self.curLocation = [CLLocationManager new];
     self.curLocation.delegate = self;
     self.curLocation.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
@@ -58,38 +63,32 @@
 
 -(void)parseJSON:(NSDictionary*)json
 {
+//	[self.tempPerDay removeAllObjects];
     NSDictionary *city = [json objectForKey:@"city"];
     self.locationText = [city objectForKey:@"name"];
-    NSArray *list = [json objectForKey:@"list"];
-//       NSMutableArray *day = [NSMutableArray new];
-//        NSMutableArray *temperatures = [NSMutableArray new];
-    NSLog(@"list size: %lu", (unsigned long)[list count]);
-    for (NSDictionary *dayWeather in list)
+	NSArray *list = [json objectForKey:@"list"];
+
+	NSMutableArray *temperatures = [NSMutableArray new];
+//    NSLog(@"list size: %lu", (unsigned long)[list count]);
+	for (NSDictionary *dayWeather in list)
     {
         NSDictionary *temp = [dayWeather objectForKey:@"temp"];
         NSString *dayTemp = [temp objectForKey:@"day"];
-        NSLog(@"today's temperature: %@", dayTemp);
-        [self.tempPerDay addObject:dayTemp];
+//        NSLog(@"today's temperature: %@", dayTemp);
+        [temperatures addObject:dayTemp];
+		NSLog(@"this temp: %@", [temperatures lastObject]);
     }
-    
+	self.curTemp = [temperatures firstObject];
+
+//	NSLog(@"current temp: %@", [self.tempPerDay firstObject]);
 //        self.tempPerDay = temperatures;
     
     dispatch_async(dispatch_get_main_queue(), ^{
+		NSLog(@"String curTemp = %@", self.curTemp);
+		self.locationLabel.text = self.locationText;
         [self.view reloadInputViews];
     });
 }
-
-//-(void)updateLatitude:(CGFloat)latitude
-//{
-//    self.posLatitude = latitude;
-//    self.latLabel.text = [NSString stringWithFormat:@"Latitude: %f", self.posLatitude];
-//}
-//
-//-(void)updateLongitude:(CGFloat)longitude
-//{
-//    self.posLongitude = longitude;
-//    self.longLabel.text = [NSString stringWithFormat:@"Longitude: %f", self.posLongitude];
-//}
 
 -(void)getWeatherWithLatitude:(CGFloat)latitude andLongitude:(CGFloat)longitude
 {
@@ -110,8 +109,8 @@
     weatherSiteName = [weatherSiteName stringByAppendingString:@"&lon="];
     weatherSiteName = [weatherSiteName stringByAppendingString:longString];
     weatherSiteName = [weatherSiteName stringByAppendingString:@"&cnt=7&units=imperial&APPID=3c045718f8871c3007d06f0e24cb09e2"];
-//    NSLog(@"URL: %@", weatherSiteName);
-    
+    NSLog(@"URL: %@", weatherSiteName);
+	
     NSURLSessionDataTask *getWeatherData = [getForecast dataTaskWithURL:[NSURL URLWithString:weatherSiteName] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
         [self parseJSON:json];
@@ -121,19 +120,27 @@
     
 //    NSLog(@"Today's temperature: %@", _tempPerDay);
     
-    self.todayTemperature.text = _tempPerDay[0];
+//    self.todayTemperature.text = _tempPerDay[0];
 }
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     CLLocation *locationNow = [locations lastObject];
-    
+	
+//	NSLog(@"Starting to get location...");
+	
     [self getWeatherWithLatitude:locationNow.coordinate.latitude andLongitude:locationNow.coordinate.longitude];
     
 //    [self updateLatitude:locationNow.coordinate.latitude];
 //    [self updateLongitude:locationNow.coordinate.longitude];
     
     
+}
+
+-(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+	NSLog(@"Error!");
+	NSLog(@"%@", [error localizedDescription]);
 }
 
 @end
