@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3FEF513D1A9D64C3002F9CAF"
+               BlueprintIdentifier = "3F3DC2571A9FE22A001DE5F1"
                BuildableName = "Kevin_Burgon_Assignment5.app"
                BlueprintName = "Kevin_Burgon_Assignment5"
                ReferencedContainer = "container:Kevin_Burgon_Assignment5.xcodeproj">
@@ -28,7 +28,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3FEF51561A9D64C3002F9CAF"
+               BlueprintIdentifier = "3F3DC2701A9FE22A001DE5F1"
                BuildableName = "Kevin_Burgon_Assignment5Tests.xctest"
                BlueprintName = "Kevin_Burgon_Assignment5Tests"
                ReferencedContainer = "container:Kevin_Burgon_Assignment5.xcodeproj">
@@ -46,7 +46,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3FEF51561A9D64C3002F9CAF"
+               BlueprintIdentifier = "3F3DC2701A9FE22A001DE5F1"
                BuildableName = "Kevin_Burgon_Assignment5Tests.xctest"
                BlueprintName = "Kevin_Burgon_Assignment5Tests"
                ReferencedContainer = "container:Kevin_Burgon_Assignment5.xcodeproj">
@@ -56,7 +56,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3FEF513D1A9D64C3002F9CAF"
+            BlueprintIdentifier = "3F3DC2571A9FE22A001DE5F1"
             BuildableName = "Kevin_Burgon_Assignment5.app"
             BlueprintName = "Kevin_Burgon_Assignment5"
             ReferencedContainer = "container:Kevin_Burgon_Assignment5.xcodeproj">
@@ -75,7 +75,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3FEF513D1A9D64C3002F9CAF"
+            BlueprintIdentifier = "3F3DC2571A9FE22A001DE5F1"
             BuildableName = "Kevin_Burgon_Assignment5.app"
             BlueprintName = "Kevin_Burgon_Assignment5"
             ReferencedContainer = "container:Kevin_Burgon_Assignment5.xcodeproj">
@@ -93,7 +93,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3FEF513D1A9D64C3002F9CAF"
+            BlueprintIdentifier = "3F3DC2571A9FE22A001DE5F1"
             BuildableName = "Kevin_Burgon_Assignment5.app"
             BlueprintName = "Kevin_Burgon_Assignment5"
             ReferencedContainer = "container:Kevin_Burgon_Assignment5.xcodeproj">

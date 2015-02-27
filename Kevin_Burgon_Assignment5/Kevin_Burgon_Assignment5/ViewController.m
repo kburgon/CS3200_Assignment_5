@@ -7,8 +7,22 @@
 //
 
 #import "ViewController.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface ViewController ()
+@interface ViewController () <CLLocationManagerDelegate>
+
+@property (nonatomic, strong) NSString *locationText;
+@property (weak, nonatomic) IBOutlet UILabel *todayTemperature;
+@property (strong, nonatomic) IBOutlet UILabel *latLabel;
+@property (strong, nonatomic) IBOutlet UILabel *longLabel;
+@property (strong, nonatomic) IBOutlet UILabel *locationLabel;
+
+@property (nonatomic, assign) CGFloat posLatitude;
+@property (nonatomic, assign) CGFloat posLongitude;
+
+@property (nonatomic, strong) CLLocationManager *curLocation;
+
+@property (nonatomic, strong) NSMutableArray* tempPerDay;
 
 @end
 
@@ -17,11 +31,109 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+//    self.locationText = @"Logan";
+    
+//    self.todayTemperature.text = @"56";
+    
+    self.curLocation = [CLLocationManager new];
+    self.curLocation.delegate = self;
+    self.curLocation.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
+    
+    if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorizedWhenInUse)
+    {
+        [self.curLocation requestWhenInUseAuthorization];
+    }
+    
+    [self.curLocation startUpdatingLocation];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+
+-(void)parseJSON:(NSDictionary*)json
+{
+    NSDictionary *city = [json objectForKey:@"city"];
+    self.locationText = [city objectForKey:@"name"];
+    NSArray *list = [json objectForKey:@"list"];
+//       NSMutableArray *day = [NSMutableArray new];
+//        NSMutableArray *temperatures = [NSMutableArray new];
+    NSLog(@"list size: %lu", (unsigned long)[list count]);
+    for (NSDictionary *dayWeather in list)
+    {
+        NSDictionary *temp = [dayWeather objectForKey:@"temp"];
+        NSString *dayTemp = [temp objectForKey:@"day"];
+        NSLog(@"today's temperature: %@", dayTemp);
+        [self.tempPerDay addObject:dayTemp];
+    }
+    
+//        self.tempPerDay = temperatures;
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.view reloadInputViews];
+    });
+}
+
+//-(void)updateLatitude:(CGFloat)latitude
+//{
+//    self.posLatitude = latitude;
+//    self.latLabel.text = [NSString stringWithFormat:@"Latitude: %f", self.posLatitude];
+//}
+//
+//-(void)updateLongitude:(CGFloat)longitude
+//{
+//    self.posLongitude = longitude;
+//    self.longLabel.text = [NSString stringWithFormat:@"Longitude: %f", self.posLongitude];
+//}
+
+-(void)getWeatherWithLatitude:(CGFloat)latitude andLongitude:(CGFloat)longitude
+{
+    self.latLabel.text = [NSString stringWithFormat:@"Latitude: %f", latitude];
+    self.longLabel.text = [NSString stringWithFormat:@"Longitude: %f", longitude];
+    NSURLSession *getForecast = [NSURLSession sharedSession];
+    
+//    NSLog(@"Raw Latitude: %f", latitude);
+    NSString *latString = [NSString stringWithFormat:@"%f", latitude];
+//    NSLog(@"Latitude: %@", latString);
+    
+//    NSLog(@"Raw Longitude: %f", longitude);
+    NSString *longString = [NSString stringWithFormat:@"%f", longitude];
+//    NSLog(@"Longitude: %@", longString);
+    
+    NSString *weatherSiteName = @"http://api.openweathermap.org/data/2.5/forecast/daily?lat=";
+    weatherSiteName = [weatherSiteName stringByAppendingString:latString];
+    weatherSiteName = [weatherSiteName stringByAppendingString:@"&lon="];
+    weatherSiteName = [weatherSiteName stringByAppendingString:longString];
+    weatherSiteName = [weatherSiteName stringByAppendingString:@"&cnt=7&units=imperial&APPID=3c045718f8871c3007d06f0e24cb09e2"];
+//    NSLog(@"URL: %@", weatherSiteName);
+    
+    NSURLSessionDataTask *getWeatherData = [getForecast dataTaskWithURL:[NSURL URLWithString:weatherSiteName] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+        [self parseJSON:json];
+    }];
+    
+    [getWeatherData resume];
+    
+//    NSLog(@"Today's temperature: %@", _tempPerDay);
+    
+    self.todayTemperature.text = _tempPerDay[0];
+}
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    CLLocation *locationNow = [locations lastObject];
+    
+    [self getWeatherWithLatitude:locationNow.coordinate.latitude andLongitude:locationNow.coordinate.longitude];
+    
+//    [self updateLatitude:locationNow.coordinate.latitude];
+//    [self updateLongitude:locationNow.coordinate.longitude];
+    
+    
 }
 
 @end
