@@ -18,6 +18,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *longLabel;
 @property (strong, nonatomic) IBOutlet UILabel *locationLabel;
 
+@property (nonatomic, strong) NSString *weatherSiteName;
+
 @property (nonatomic, assign) CGFloat posLatitude;
 @property (nonatomic, assign) CGFloat posLongitude;
 
@@ -104,19 +106,12 @@
     NSString *longString = [NSString stringWithFormat:@"%f", longitude];
 //    NSLog(@"Longitude: %@", longString);
     
-    NSString *weatherSiteName = @"http://api.openweathermap.org/data/2.5/forecast/daily?lat=";
+    self.weatherSiteName = @"http://api.openweathermap.org/data/2.5/forecast/daily?lat=";
     weatherSiteName = [weatherSiteName stringByAppendingString:latString];
     weatherSiteName = [weatherSiteName stringByAppendingString:@"&lon="];
     weatherSiteName = [weatherSiteName stringByAppendingString:longString];
     weatherSiteName = [weatherSiteName stringByAppendingString:@"&cnt=7&units=imperial&APPID=3c045718f8871c3007d06f0e24cb09e2"];
     NSLog(@"URL: %@", weatherSiteName);
-	
-    NSURLSessionDataTask *getWeatherData = [getForecast dataTaskWithURL:[NSURL URLWithString:weatherSiteName] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-        [self parseJSON:json];
-    }];
-    
-    [getWeatherData resume];
     
 //    NSLog(@"Today's temperature: %@", _tempPerDay);
     
@@ -130,6 +125,13 @@
 //	NSLog(@"Starting to get location...");
 	
     [self getWeatherWithLatitude:locationNow.coordinate.latitude andLongitude:locationNow.coordinate.longitude];
+
+     NSURLSessionDataTask *getWeatherData = [getForecast dataTaskWithURL:[NSURL URLWithString:self.weatherSiteName] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+        [self parseJSON:json];
+    }];
+    
+    [getWeatherData resume];
     
 //    [self updateLatitude:locationNow.coordinate.latitude];
 //    [self updateLongitude:locationNow.coordinate.longitude];
