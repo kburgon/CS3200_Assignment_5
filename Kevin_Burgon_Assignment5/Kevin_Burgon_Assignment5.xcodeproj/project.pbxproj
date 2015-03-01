@@ -14,6 +14,7 @@
 		3F3DC2691A9FE22A001DE5F1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F3DC2681A9FE22A001DE5F1 /* Images.xcassets */; };
 		3F3DC26C1A9FE22A001DE5F1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F3DC26A1A9FE22A001DE5F1 /* LaunchScreen.xib */; };
 		3F3DC2781A9FE22A001DE5F1 /* Kevin_Burgon_Assignment5Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3DC2771A9FE22A001DE5F1 /* Kevin_Burgon_Assignment5Tests.m */; };
+		3FE701A81AA2894E00F04FA4 /* WeatherViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE701A71AA2894E00F04FA4 /* WeatherViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 		3F3DC2711A9FE22A001DE5F1 /* Kevin_Burgon_Assignment5Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Kevin_Burgon_Assignment5Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F3DC2761A9FE22A001DE5F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F3DC2771A9FE22A001DE5F1 /* Kevin_Burgon_Assignment5Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Kevin_Burgon_Assignment5Tests.m; sourceTree = "<group>"; };
+		3FE701A61AA2894E00F04FA4 /* WeatherViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherViewCell.h; sourceTree = "<group>"; };
+		3FE701A71AA2894E00F04FA4 /* WeatherViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +89,8 @@
 				3F3DC2621A9FE22A001DE5F1 /* ViewController.h */,
 				3F3DC2631A9FE22A001DE5F1 /* ViewController.m */,
 				3F3DC2651A9FE22A001DE5F1 /* Main.storyboard */,
+				3FE701A61AA2894E00F04FA4 /* WeatherViewCell.h */,
+				3FE701A71AA2894E00F04FA4 /* WeatherViewCell.m */,
 				3F3DC2681A9FE22A001DE5F1 /* Images.xcassets */,
 				3F3DC26A1A9FE22A001DE5F1 /* LaunchScreen.xib */,
 				3F3DC25B1A9FE22A001DE5F1 /* Supporting Files */,
@@ -222,6 +227,7 @@
 				3F3DC2641A9FE22A001DE5F1 /* ViewController.m in Sources */,
 				3F3DC2611A9FE22A001DE5F1 /* AppDelegate.m in Sources */,
 				3F3DC25E1A9FE22A001DE5F1 /* main.m in Sources */,
+				3FE701A81AA2894E00F04FA4 /* WeatherViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,6 +420,7 @@
 				3F3DC27D1A9FE22A001DE5F1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3F3DC27E1A9FE22A001DE5F1 /* Build configuration list for PBXNativeTarget "Kevin_Burgon_Assignment5Tests" */ = {
 			isa = XCConfigurationList;
@@ -422,6 +429,7 @@
 				3F3DC2801A9FE22A001DE5F1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
